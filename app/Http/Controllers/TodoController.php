@@ -50,4 +50,19 @@ class TodoController extends Controller {
     return redirect()->to('todo');
     //保存後にToDo一覧にリダイレクトするようにしている
   }
+
+  public function edit($id) {
+    //編集ページに遷移すると既にフォームに値が入力されている状態になっている
+    $todo = $this->todo->find($id);
+    return view('todo.edit')->with(compact('todo'));
+  }
+
+  public function update(Request $request, $id) {
+    $input = $request->all();
+    $this->todo->where('id', $id)->update(['title' => $input['title']]);
+    //idに紐づくデータのタイトルを更新する処理
+    return redirect()->to('todo');
+  }
+
+
 }
