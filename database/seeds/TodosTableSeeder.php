@@ -2,20 +2,10 @@
 
 use Illuminate\Database\Seeder;
 
-class TodosTableSeeder extends Seeder
-{
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        //Model::unguard();
-        $this->call('TodosTableSeeder');
-        //call - アプリケーションに対してカスタムHTTPリクエストを作成し、
-        //完全なIlluminate\Http\Responseオブジェクトを取得
+class TodosTableSeeder extends Seeder {
 
+    public function run() {
+      
         DB::table('todos')->truncate();
         //TRUNCATE - テーブルから全ての行を削除するSQL
         //truncateメソッド - 全レコードを削除し、自動増分のIDを0にリセットするためにテーブルをTRUNCATEしたい場合
