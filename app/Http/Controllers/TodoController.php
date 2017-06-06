@@ -42,6 +42,7 @@ class TodoController extends Controller {
     //$request->all() - 入力されたフォームの内容を取得
     $this->todo->fill($input);
     //fill()を使うとEloquentは$fillableをチェックして、このプロパティを設定できるかどうかを確認する。
+    //Eloquest - DBとモデルオブジェクトを対応付ける機能。テーブルのレコードと、プログラム言語の扱うオブジェクトを対応付けること
     $this->todo->save();
     //save() - 新しいレコードがデータベースに挿入されます。
     //created_atとupdated_atタイムスタンプは自動的に設定されます。
@@ -55,13 +56,16 @@ class TodoController extends Controller {
     //編集ページに遷移すると既にフォームに値が入力されている状態になっている
     $todo = $this->todo->find($id);
     return view('todo.edit')->with(compact('todo'));
+    //with - 変数を受け渡す
   }
 
   public function update(Request $request, $id) {
     $input = $request->all();
     $this->todo->where('id', $id)->update(['title' => $input['title']]);
     //idに紐づくデータのタイトルを更新する処理
+    //update - データの更新
     return redirect()->to('todo');
+    //ToDo一覧にリダイレクト
   }
 
   public function destroy($id) {
